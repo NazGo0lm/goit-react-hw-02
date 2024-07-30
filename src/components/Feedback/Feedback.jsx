@@ -2,7 +2,7 @@
 
 //import { useState } from "react"
 
-const Feedback = ( {good,neutral,bad,positiveFeedback} ) => {
+const Feedback = ( {good,neutral,bad,positiveFeedback,totalFeedback} ) => {
   
 
 
@@ -13,8 +13,10 @@ const Feedback = ( {good,neutral,bad,positiveFeedback} ) => {
           <p>Neutral: {neutral}</p>
           <p>Bad: {bad}</p>
         
+      { totalFeedback ?
+        <p>Total: {totalFeedback}</p> : ''}
       { positiveFeedback ?
-        <p>Total: {positiveFeedback}%</p> : ''}
+        <p>Positive: {positiveFeedback}%</p> : ''}
       
     </div>
   )

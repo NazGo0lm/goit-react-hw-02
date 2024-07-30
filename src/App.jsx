@@ -1,12 +1,13 @@
 //import { useState } from 'react'
 import './App.css'
 import Options from './components/Options/Options';
-import SipCafe  from './components/SipCafe/SipCafe';
+import Description  from './components/Description/Description';
 //import userData from './data/userData.json'
 //import friends from './data/friends.json'
 //import transactions from './data/transactions.json'
 import Feedback from './components/Feedback/Feedback';
 import { useEffect, useState } from 'react';
+import Notification from './components/Notification/Notification';
 
 
 
@@ -26,29 +27,31 @@ const App = () => {
   },[count])
 
 
-  const onSupplyAdd = (btnName) => {
-    if (btnName === 'reset') {
+  const updateFeedback = (btnName) => {
+    
+    setCount({...count, [btnName]:count[btnName] + 1})
+  }
+   const deleteFeedback = () => {
       return setCount({
         good: 0,
         neutral: 0,
         bad: 0
       })
-    }
-    setCount({...count, [btnName]:count[btnName] + 1})
-  }
+    
+  } 
   
   const totalFeedback = count.good + count.neutral + count.bad;
   const positiveFeedback = Math.round((count.good / totalFeedback) * 100);
-  const superId = Math.round(Math.random() * 100000000000);
+  
 
  return (
   <>
-   <SipCafe />
+   <Description />
      
-     <Options onSupplyAdd={onSupplyAdd} />
+     <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} deleteFeedback={deleteFeedback} />
      {totalFeedback !== 0 ? 
-        <Feedback key={superId} good={count.good} neutral={count.neutral} bad={count.bad} positiveFeedback={positiveFeedback}  />
-       : <p>No feedback yet</p>
+        <Feedback  good={count.good} neutral={count.neutral} bad={count.bad} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback}  />
+       : <Notification>No feedback yet</Notification>
      }
    
 

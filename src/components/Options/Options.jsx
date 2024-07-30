@@ -4,14 +4,16 @@
 
 
 
-const Options = ({onSupplyAdd}) => {
+const Options = ({updateFeedback,totalFeedback,deleteFeedback}) => {
   return (
     
     <div className="">
-      <button type="button" onClick={()=> onSupplyAdd('good')}>Good</button>
-      <button type="button" onClick={()=> onSupplyAdd('neutral')}>Neutral</button>
-      <button type="button" onClick={()=> onSupplyAdd('bad')}>Bad</button>
-      <button type="button" onClick={()=> onSupplyAdd('reset')}>Reset</button>
+      <button type="button" onClick={()=> updateFeedback('good')}>Good</button>
+      <button type="button" onClick={()=> updateFeedback('neutral')}>Neutral</button>
+      <button type="button" onClick={() => updateFeedback('bad')}>Bad</button>
+      {totalFeedback !== 0 &&
+        <button type="button" onClick={()=> deleteFeedback()}>Reset</button>}
+      
     </div>
 
    
